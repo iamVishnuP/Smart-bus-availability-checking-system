@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+let baseUrl = import.meta.env.VITE_API_URL || '/api';
+if (baseUrl.startsWith('http') && !baseUrl.endsWith('/api')) {
+    baseUrl = baseUrl.replace(/\/$/, '') + '/api';
+}
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '/api'
+    baseURL: baseUrl
 });
 
 // Add token to requests
