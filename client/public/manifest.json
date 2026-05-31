@@ -1,0 +1,18 @@
+{
+  "short_name": "Smart Bus",
+  "name": "Smart Bus Availability Checking System",
+  "description": "State-of-the-art AI Bus Tracking and Bus Finder System with interactive crowdsourced timelines.",
+  "icons": [
+    {
+      "src": "/bus-logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "display": "standalone",
+  "orientation": "portrait"
+}
