@@ -77,6 +77,13 @@ export const getBusesBetweenStops = async (source, destination, requestedTime = 
                     arrTime = bus.stops[destIdx - 1].time;
                 }
 
+                const arrMinutes = timeToMinutes(arrTime);
+
+                // STRICT ROUTE DIRECTION VALIDATION: Destination time must be greater than source time
+                if (arrMinutes <= depMinutes) {
+                    continue;
+                }
+
                 // Fetch latest "I'm On This Bus" passed stop (expires after 12h)
                 let updatedLocation = 'Updated location not available';
                 if (bus.liveTracking && bus.liveTracking.currentStop && bus.liveTracking.lastUpdated) {
