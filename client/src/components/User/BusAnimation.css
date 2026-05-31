@@ -1,0 +1,390 @@
+/* Animation Scene Box - Fixed to the viewport background at the bottom */
+.bus-scene-container {
+    width: 100%;
+    height: 130px;
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+    border-top: 3px solid var(--border-color);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+[data-theme="red"] .bus-scene-container {
+    background: linear-gradient(180deg, #3a0007 0%, #7d0914 100%);
+}
+
+/* Scenic background silhouettes scrolling slower to simulate parallax */
+.scenic-background {
+    position: absolute;
+    width: 200%;
+    height: 60px;
+    bottom: 45px;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.city-silhouette {
+    width: 100%;
+    height: 100%;
+    opacity: 0.12;
+    background-image: repeating-linear-gradient(90deg, 
+        transparent 0px, transparent 20px, 
+        #fff 20px, #fff 40px,
+        #fff 60px, #fff 80px,
+        transparent 80px, transparent 120px
+    );
+    background-size: 300px 100%;
+    animation: cityScroll 25s linear infinite;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Black road surface stretching across */
+.road-surface {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #111111;
+    border-top: 3px solid #333;
+    border-bottom: 3px solid #222;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Scrolling lane lines - Black road with moving white lines */
+.road-lane-lines {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 200%;
+    height: 4px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg, 
+        #ffffff 0px, #ffffff 30px, 
+        transparent 30px, transparent 70px
+    );
+    animation: laneScroll 0.6s linear infinite;
+}
+
+/* Bus Position Wrapper */
+.bus-wrapper {
+    position: absolute;
+    bottom: 12px;
+    width: 180px;
+    height: 65px;
+    z-index: 3;
+    animation: 
+        busEngineVibrate 0.15s linear infinite alternate, 
+        busRoadBumps 4s ease-in-out infinite,
+        busDriveAcross 14s linear infinite;
+}
+
+/* HTML/CSS Vector Bus Body */
+.bus-chassis {
+    width: 170px;
+    height: 46px;
+    background-color: var(--bus-color);
+    border: 3px solid var(--bus-color-dark);
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: inset 0 5px 0 var(--bus-color-light), 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 4;
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Cabin Windows */
+.bus-cabin {
+    display: flex;
+    gap: 7px;
+    padding: 6px 10px;
+}
+
+.bus-window-frame {
+    background: var(--bus-window);
+    border: 2px solid var(--bus-color-dark);
+    border-radius: 4px;
+    width: 26px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: border-color 0.5s ease;
+}
+
+.driver-window {
+    border-top-right-radius: 9px;
+    width: 32px;
+}
+
+.passenger-silhouette {
+    font-size: 0.7rem;
+    opacity: 0.45;
+    transform: translateY(2px);
+    user-select: none;
+}
+
+.driver-silhouette {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    transform: translateY(2px);
+    user-select: none;
+}
+
+/* Front Details */
+.bus-grill {
+    width: 10px;
+    height: 10px;
+    background: #222;
+    border-radius: 2px;
+    position: absolute;
+    right: 5px;
+    bottom: 6px;
+}
+
+/* Glowing Headlights */
+.bus-headlight {
+    width: 5px;
+    height: 8px;
+    background: #ffeb3b;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    position: absolute;
+    right: -3px;
+    bottom: 12px;
+    box-shadow: 0 0 12px #ffeb3b, 0 0 4px #ffeb3b;
+}
+
+/* Bright projection beam casting onto the black road */
+.light-beam {
+    position: absolute;
+    left: 4px;
+    top: -12px;
+    width: 120px;
+    height: 32px;
+    background: linear-gradient(90deg, rgba(255, 235, 59, 0.4) 0%, rgba(255, 235, 59, 0) 100%);
+    clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bus-taillight {
+    width: 3px;
+    height: 8px;
+    background: #f44336;
+    position: absolute;
+    left: -3px;
+    bottom: 12px;
+    box-shadow: 0 0 8px #f44336;
+}
+
+/* Wheel Arches cutouts on chassis */
+.wheel-arch {
+    width: 28px;
+    height: 14px;
+    background: #111;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    position: absolute;
+    bottom: -3px;
+    border: 2px solid var(--bus-color-dark);
+    border-bottom: none;
+    transition: border-color 0.5s ease;
+}
+
+.arch-front {
+    right: 20px;
+}
+
+.arch-back {
+    left: 20px;
+}
+
+/* Wheels & spinning tires */
+.bus-wheel {
+    width: 24px;
+    height: 24px;
+    background: var(--bus-wheel);
+    border: 3px solid #1a1a1a;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -6px;
+    z-index: 5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.wheel-front {
+    right: 22px;
+}
+
+.wheel-back {
+    left: 22px;
+}
+
+.wheel-tire {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    animation: tireSpin 0.3s linear infinite;
+}
+
+/* Spoke markings on wheels to show rotation */
+.wheel-spoke {
+    width: 2px;
+    height: 100%;
+    background: #64748b;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.wheel-spoke:nth-child(2) {
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.wheel-spoke:nth-child(3) {
+    transform: translateX(-50%) rotate(90deg);
+}
+
+.wheel-spoke:nth-child(4) {
+    transform: translateX(-50%) rotate(135deg);
+}
+
+/* Engine Exhaust Pipes & Puffs */
+.exhaust-pipe {
+    position: absolute;
+    left: -10px;
+    bottom: -2px;
+    display: flex;
+    gap: 4px;
+    flex-direction: row-reverse;
+}
+
+.smoke-puff {
+    width: 6px;
+    height: 6px;
+    background: rgba(226, 232, 240, 0.45);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.puff-1 {
+    animation: puffExhaust 0.9s ease-out infinite;
+}
+
+.puff-2 {
+    animation: puffExhaust 0.9s ease-out infinite 0.3s;
+}
+
+.puff-3 {
+    animation: puffExhaust 0.9s ease-out infinite 0.6s;
+}
+
+/* KEYFRAMES ANIMATIONS */
+
+/* Scrolling city */
+@keyframes cityScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-300px);
+    }
+}
+
+/* Scrolling white markings on road */
+@keyframes laneScroll {
+    0% {
+        transform: translateX(0) translateY(-50%);
+    }
+    100% {
+        transform: translateX(-100px) translateY(-50%);
+    }
+}
+
+/* Rotating tires */
+@keyframes tireSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Engine vibration shake */
+@keyframes busEngineVibrate {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-0.8px);
+    }
+}
+
+/* Road bumps every now and then */
+@keyframes busRoadBumps {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    5% {
+        transform: translateY(-2px) rotate(0.5deg);
+    }
+    7% {
+        transform: translateY(0.5px) rotate(-0.5deg);
+    }
+    9% {
+        transform: translateY(0);
+    }
+    38% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3px) rotate(-0.5deg);
+    }
+    42% {
+        transform: translateY(1px) rotate(0.3deg);
+    }
+    44% {
+        transform: translateY(0);
+    }
+}
+
+/* Exhaust smoke puffs drifting up and fading */
+@keyframes puffExhaust {
+    0% {
+        transform: translate(0, 0) scale(0.6);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-25px, -12px) scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Continuous smooth drive across the screen from left to right */
+@keyframes busDriveAcross {
+    0% {
+        left: -200px;
+    }
+    100% {
+        left: 100%;
+    }
+}

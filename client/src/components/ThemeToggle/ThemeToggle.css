@@ -1,0 +1,69 @@
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 70px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 3px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.toggle-slider {
+    width: 27px;
+    height: 27px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-slider.red {
+    transform: translateX(35px);
+    background: linear-gradient(135deg, #ff0844, #ffb199);
+}
+
+.toggle-slider.blue {
+    transform: translateX(0);
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.toggle-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 60px;
+        height: 30px;
+    }
+
+    .toggle-slider {
+        width: 24px;
+        height: 24px;
+    }
+
+    .toggle-slider.red {
+        transform: translateX(30px);
+    }
+
+    .toggle-icon {
+        font-size: 14px;
+    }
+}

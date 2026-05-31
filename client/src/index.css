@@ -1,0 +1,81 @@
+:root {
+    --transition-speed: 0.3s;
+}
+
+/* Light Blue Theme (Default) */
+[data-theme="blue"] {
+    --primary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --primary-color: #4facfe;
+    --primary-dark: #00f2fe;
+    --accent-color: #4facfe;
+    --bg-color: #f0f8ff;
+    --card-bg: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #b3d7ff;
+    --hover-shadow: rgba(79, 172, 254, 0.3);
+    --input-focus: rgba(79, 172, 254, 0.1);
+    
+    /* Dynamic Bus Design variables: Blue Theme -> Red Bus */
+    --bus-color: #ff3b30;
+    --bus-color-dark: #c92a2a;
+    --bus-color-light: #ff6b6b;
+    --bus-window: #1e293b;
+    --bus-wheel: #2d3748;
+    
+    /* Static 3D Shadow Projection (No moving effects, premium depth look) */
+    --card-3d-shadow: 0 8px 0px #b3d7ff, 0 16px 24px rgba(79, 172, 254, 0.12);
+}
+
+/* Red Theme (Toggled) */
+[data-theme="red"] {
+    --primary-gradient: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+    --primary-color: #ff0844;
+    --primary-dark: #ffb199;
+    --accent-color: #ff0844;
+    --bg-color: #fff0f0;
+    --card-bg: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #ffb3c1;
+    --hover-shadow: rgba(255, 8, 68, 0.3);
+    --input-focus: rgba(255, 8, 68, 0.1);
+    
+    /* Dynamic Bus Design variables: Red Theme -> Blue Bus */
+    --bus-color: #007aff;
+    --bus-color-dark: #1971c2;
+    --bus-color-light: #4dabf7;
+    --bus-window: #1e293b;
+    --bus-wheel: #2d3748;
+    
+    /* Static 3D Shadow Projection (No moving effects, premium depth look) */
+    --card-3d-shadow: 0 8px 0px #ffb3c1, 0 16px 24px rgba(255, 8, 68, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color var(--transition-speed) ease,
+        color var(--transition-speed) ease,
+        border-color var(--transition-speed) ease;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--bg-color);
+    color: var(--text-primary);
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+#root {
+    min-height: 100vh;
+}
