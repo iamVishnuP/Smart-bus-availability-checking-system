@@ -674,7 +674,7 @@
 
 /* Responsive adjustment */
 @media (max-width: 480px) {
-    .chatbot-window {
+    .floating-chatbot .chatbot-window {
         width: calc(100vw - 30px);
         height: 80vh;
         bottom: 80px;

@@ -3,8 +3,7 @@ const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/bus-logo.svg',
-  '/api' // Local endpoint base
+  '/bus-logo.svg'
 ];
 
 // Install Service Worker and cache essential static shell assets
@@ -41,7 +40,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
   // Skip caching API network calls so search and live tracking remain strictly live
-  if (url.pathname.includes('/api/')) {
+  if (url.pathname.startsWith('/api') || url.pathname.includes('/api/')) {
     return;
   }
 
@@ -62,7 +61,8 @@ self.addEventListener('fetch', (event) => {
         return networkResponse;
       }).catch(() => {
         // Fallback for document requests if offline
-        if (event.request.headers.get('accept').includes('text/html')) {
+        const acceptHeader = event.request.headers.get('accept');
+        if (acceptHeader && acceptHeader.includes('text/html')) {
           return caches.match('/index.html');
         }
       });

@@ -5,6 +5,7 @@ import './Navbar.css';
 
 const Navbar = ({ username, isAdmin }) => {
     const [showAbout, setShowAbout] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ const Navbar = ({ username, isAdmin }) => {
                     <span className="navbar-title">Smart Bus Availability Checking System</span>
                 </div>
 
+                {/* Desktop Menu - Hidden on Mobile */}
                 <div className="navbar-menu">
                     <button className="navbar-link" onClick={() => setShowAbout(true)}>
                         About
@@ -70,6 +72,79 @@ const Navbar = ({ username, isAdmin }) => {
                         </button>
                     )}
                 </div>
+
+                {/* Mobile Controls - Visible only on Mobile */}
+                <div className="navbar-mobile-controls">
+                    <button
+                        className="theme-toggle-btn mobile-theme-btn"
+                        onClick={toggleTheme}
+                        aria-label="Toggle theme"
+                    >
+                        <div className={`toggle-slider-inline ${theme}`}>
+                            <span className="toggle-icon-inline">
+                                {theme === 'blue' ? '🌙' : '🔥'}
+                            </span>
+                        </div>
+                    </button>
+
+                    <button 
+                        className={`hamburger-btn ${menuOpen ? 'open' : ''}`}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <span className="hamburger-line"></span>
+                        <span className="hamburger-line"></span>
+                        <span className="hamburger-line"></span>
+                    </button>
+                </div>
+
+                {/* Sleek Mobile Dropdown Drawer */}
+                {menuOpen && (
+                    <div className="mobile-menu-dropdown animate-slide-down">
+                        <button 
+                            className="mobile-menu-link" 
+                            onClick={() => {
+                                setShowAbout(true);
+                                setMenuOpen(false);
+                            }}
+                        >
+                            ℹ️ About
+                        </button>
+                        
+                        {isActuallyAdmin ? (
+                            <>
+                                <button 
+                                    className="mobile-menu-link" 
+                                    onClick={() => {
+                                        handleDashboardToggle();
+                                        setMenuOpen(false);
+                                    }}
+                                >
+                                    ⚙️ {isCurrentAdminPage ? 'User View' : 'Admin Dashboard'}
+                                </button>
+                                <button 
+                                    className="mobile-menu-link mobile-logout" 
+                                    onClick={() => {
+                                        handleLogout();
+                                        setMenuOpen(false);
+                                    }}
+                                >
+                                    🚪 Logout
+                                </button>
+                            </>
+                        ) : (
+                            <button 
+                                className="mobile-menu-link mobile-admin-btn" 
+                                onClick={() => {
+                                    handleAdminPortal();
+                                    setMenuOpen(false);
+                                }}
+                            >
+                                🔑 Admin Portal
+                            </button>
+                        )}
+                    </div>
+                )}
             </nav>
 
             {/* About Modal */}
